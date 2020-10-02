@@ -60,7 +60,7 @@ class Change(models.Model):
     )
     old_value = models.TextField(
         verbose_name='change data',
-        max_length=1000
+        max_length=1000, null=True
     )
     new_value = models.TextField(
         verbose_name='change data',

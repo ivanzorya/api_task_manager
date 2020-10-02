@@ -53,6 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api_task_manager.wsgi.application'
 
+# local DATABASES settings
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -60,6 +61,7 @@ WSGI_APPLICATION = 'api_task_manager.wsgi.application'
 #     }
 # }
 
+# docker DATABASES settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

@@ -10,6 +10,8 @@ from .models import Task
 
 DATE_1 = datetime.strptime('10/10/2020', '%m/%d/%Y')
 DATE_2 = datetime.strptime('10/10/2021', '%m/%d/%Y')
+DATE_3 = datetime.strptime('11/10/2021', '%m/%d/%Y')
+DATE_4 = datetime.strptime('10/10/2022', '%m/%d/%Y')
 
 
 def random_date(start, end):
@@ -42,7 +44,7 @@ class TaskManagerTest(TestCase):
         self.description = uuid.uuid4().hex
         self.new_description = uuid.uuid4().hex
         self.completed = str(random_date(DATE_1, DATE_2).date())
-        self.new_completed = str(random_date(DATE_1, DATE_2).date())
+        self.new_completed = str(random_date(DATE_3, DATE_4).date())
         self.status = ['new', 'planned', 'work', 'completed']
         self.task = Task.objects.create(
             title=self.title,
