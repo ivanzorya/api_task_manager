@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
+from . import views
 from .views import TaskViewSet, ChangeViewSet, UserViewSet
 
 router = DefaultRouter()
@@ -21,5 +22,6 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name='token_refresh'
     ),
+    path('v1/1/', views.live_search)
 
 ]

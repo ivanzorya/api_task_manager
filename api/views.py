@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Q
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 
 from .models import Task, Change
 from .serializers import TaskSerializer, ChangeSerializer, UserSerializer
@@ -90,3 +92,18 @@ class ChangeViewSet(viewsets.ModelViewSet):
             pk=self.kwargs.get('task_id')
         )
         return task.changes.all()
+
+
+@api_view(['GET'])
+def live_search(request):
+    q = request.GET.get("q", "")
+    if q == '':
+        products = Task.objects.all()
+        serializer = TaskSerializer(products, many=True)
+        return Response(serializer.data)
+    products = Task.objects.filter(
+        Q(title__icontains=q)
+        | Q(description__icontains=q)
+    )
+    serializer = TaskSerializer(products, many=True)
+    return Response(serializer.data)
