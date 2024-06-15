@@ -1,32 +1,25 @@
 # api_task_manager
-Техническое описание проекта TaskManager
+Technical Description of the TaskManager Project
 
-Пользовательские роли
+### User Roles
 
-Аноним — может зарегистрироваться.
+- **Anonymous** — can register.
+- **Authenticated user (user)** — can create, read, and update their tasks. Can view the task change history.
 
-Аутентифицированный пользователь (user) — может создавать, читать, изменять свои задачи. Может просмотреть историю изменения задачи.
+### User Registration Algorithm
+1. The user sends a POST request with the parameters `username` and `password` to `/api/v1/auth/`.
+2. The user sends a POST request with the parameters `username` and `password` to `/api/v1/token/`, and in response to the request, they receive a JWT token (`access`).
 
+These operations are performed once during user registration. As a result, the user receives a token and can work with the API, sending this token with each request.
 
-Алгоритм регистрации пользователей
-1. Пользователь отправляет POST-запрос с параметрами username и password на /api/v1/auth/.
-2. Пользователь отправляет POST-запрос с параметрами username и password на /api/v1/token/, в ответе на запрос ему приходит JWT-токен ('access').
+### API Resources
 
-Эти операции выполняются один раз, при регистрации пользователя. В результате пользователь получает токен и может работать с API, отправляя этот токен с каждым запросом.
+- **AUTH Resource**: registration.
+- **TOKEN Resource**: authentication.
+- **TASKS Resource**: tasks and change history.
 
+Each resource is described in the documentation at `/redoc/`: endpoints, allowed request types, access rights, and additional parameters, if necessary.
 
-Ресурсы API
-
-Ресурс AUTH: регистрация.
-
-Ресурс TOKEN: авторизация.
-
-Ресурс TASKS: задачи и история изменений.
-
-
-Каждый ресурс описан в документации /redoc/: указаны эндпойнты, разрешённые типы запросов, права доступа и дополнительные параметры, если это необходимо.
-
-
-Связанные данные и каскадное удаление
-* При удалении задачи удаляется история изменений.
-* При удалении пользователя удаляются его задачи.
+### Related Data and Cascading Deletion
+- When a task is deleted, its change history is deleted.
+- When a user is deleted, their tasks are deleted.
